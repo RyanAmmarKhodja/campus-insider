@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("campus-insider")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67f514729490d83c1d332edf9b73ed1547d1f621")]
 [assembly: System.Reflection.AssemblyProductAttribute("campus-insider")]
 [assembly: System.Reflection.AssemblyTitleAttribute("campus-insider")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
