@@ -42,7 +42,7 @@ Users can create carpool trips, join or leave rides, and manage seat availabilit
 
 UML diagrams are used to model entities, relationships, and business operations.
 ---
-<p align="center"> <img src="preview/interface1.jpeg" width="45%" /> <img src="preview/interface0.jpeg" width="45%" /> </p>
+<p align="center"> <img src="preview/db_uml_campusinsider.png" width="45%" /> <img src="preview/highleveldiagram.png" width="45%" /> </p>
 
 ## Project Status
 
