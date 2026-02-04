@@ -79,5 +79,34 @@ namespace campus_insider.Controllers
                     CreatedAt = user.CreatedAt
                 });
         }
+
+
+
+        [HttpPut]
+        public async Task<ActionResult<UserUpdateDto>> Update([FromBody] UserUpdateDto userDto)
+        {
+
+            try
+            {
+                var user = new User
+                {
+                    Id = userDto.Id,
+                    FirstName = userDto.FirstName,
+                    LastName = userDto.LastName,
+                    Password = userDto.Password,
+                    Email = userDto.Email
+                };
+                
+                
+                await _userService.UpdateAsync(user);
+
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

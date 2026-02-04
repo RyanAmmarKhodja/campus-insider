@@ -30,5 +30,22 @@ namespace campus_insider.Services
             return user;
         }
 
+        public async Task<User> UpdateAsync(User user)
+        {
+            await _context.Users
+            .Where(e => e.Id == user.Id)
+            .ExecuteUpdateAsync(s => s
+                .SetProperty(e => e.FirstName, user.FirstName)
+                .SetProperty(e => e.LastName, user.LastName)
+                .SetProperty(e => e.Email, user.Email)
+                .SetProperty(e => e.Password, user.Password)
+            );
+
+            return user;
+
+        }
+
     }
+
 }
+

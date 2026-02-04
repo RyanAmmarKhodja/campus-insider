@@ -47,6 +47,48 @@
   },
   {
     "ContainingType": "campus_insider.Controllers.EquipmentController",
+    "Method": "Delete",
+    "RelativePath": "api/equipment",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "equipmentDto",
+        "Type": "campus_insider.DTOs.EquipmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "campus_insider.Controllers.EquipmentController",
+    "Method": "Update",
+    "RelativePath": "api/equipment",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "equipmentDto",
+        "Type": "campus_insider.DTOs.EquipmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "campus_insider.DTOs.EquipmentDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "campus_insider.Controllers.EquipmentController",
     "Method": "GetById",
     "RelativePath": "api/equipment/{id}",
     "HttpMethod": "GET",
@@ -108,6 +150,32 @@
     "ReturnTypes": [
       {
         "Type": "campus_insider.DTOs.UserResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "campus_insider.Controllers.UserController",
+    "Method": "Update",
+    "RelativePath": "api/user",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "campus_insider.DTOs.UserUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "campus_insider.DTOs.UserUpdateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

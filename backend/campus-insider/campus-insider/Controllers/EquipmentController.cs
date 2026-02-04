@@ -2,6 +2,7 @@
 using campus_insider.DTOs;
 using campus_insider.Models;
 using campus_insider.Services;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.InteropServices;
@@ -21,7 +22,7 @@ namespace campus_insider.Controllers
         [HttpGet]
         public async Task<ActionResult<List<EquipmentResponseDto>>> GetEquipment()
         {
-            var equipment = await _equipmentService.GetAllAsync();
+            var equipment = await _equipmentService.GetAllEquipment();
 
             var result = equipment.Select(e=> new EquipmentResponseDto
             {
@@ -69,7 +70,7 @@ namespace campus_insider.Controllers
                 OwnerId = 1 // TEMP: replace with User.Identity
             };
 
-            var created = await _equipmentService.CreateAsync(equipment);
+            var created = await _equipmentService.ShareEquipment(equipment);
 
             return CreatedAtAction(nameof(GetById), new { id = created.Id },
                 new EquipmentResponseDto
@@ -82,5 +83,54 @@ namespace campus_insider.Controllers
                     CreatedAt = created.CreatedAt
                 });
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete([FromBody] EquipmentDto equipmentDto)
+        {
+            try
+            {
+                var equipment = new Equipment
+                {
+                    Id = equipmentDto.Id,
+                    Name = equipmentDto.Name,
+                    Category = equipmentDto.Category,
+                    Description = equipmentDto.Description,
+                    OwnerId = equipmentDto.OwnerId
+                };
+                
+                await _equipmentService.UnshareEquipment(equipment);
+
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<EquipmentDto>> Update([FromBody] EquipmentDto equipmentDto)
+        {
+
+            try
+            {
+                var equipment = new Equipment
+                {
+                    Id = equipmentDto.Id,
+                    Name = equipmentDto.Name,
+                    Category = equipmentDto.Category,
+                    Description = equipmentDto.Description,
+                    OwnerId = equipmentDto.OwnerId
+                };
+                await _equipmentService.UpdateEquipment(equipment);
+
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
