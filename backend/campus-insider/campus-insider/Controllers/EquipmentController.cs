@@ -2,6 +2,7 @@
 using campus_insider.DTOs;
 using campus_insider.Models;
 using campus_insider.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace campus_insider.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/equipment")]
     public class EquipmentController : ControllerBase

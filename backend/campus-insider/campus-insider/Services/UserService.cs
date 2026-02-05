@@ -1,4 +1,5 @@
 ﻿using campus_insider.Data;
+using campus_insider.DTOs;
 using campus_insider.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,11 @@ namespace campus_insider.Services
         public async Task<User> GetByIdAsync(long id)
         {
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<User> GetByLogin(LoginDto coords)
+        {
+            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(e => e.Email == coords.Email);
         }
 
         public async Task<User> CreateAsync(User user)
