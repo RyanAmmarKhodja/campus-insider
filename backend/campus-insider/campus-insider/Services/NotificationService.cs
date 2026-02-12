@@ -1,6 +1,8 @@
 ﻿using campus_insider.Data;
 using campus_insider.DTOs;
+using campus_insider.Hubs;
 using campus_insider.Models;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace campus_insider.Services
@@ -8,10 +10,12 @@ namespace campus_insider.Services
     public class NotificationService
     {
         private readonly AppDbContext _context;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        public NotificationService(AppDbContext context)
+        public NotificationService(AppDbContext context, IHubContext<NotificationHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         #region --- Queries ---
@@ -83,6 +87,10 @@ namespace campus_insider.Services
 
             // TODO: Trigger real-time push here (SignalR)
             // await _hubContext.Clients.User(userId.ToString()).SendAsync("ReceiveNotification", MapToDto(notification));
+
+            await _hubContext.Clients
+            .Group($"user-{userId}")
+            .SendAsync("ReceiveNotification", MapToDto(notification));
 
             return ServiceResult.Ok();
         }

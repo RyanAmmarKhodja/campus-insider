@@ -1,4 +1,5 @@
 using campus_insider.Data;
+using campus_insider.Hubs;
 using campus_insider.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
@@ -93,6 +94,9 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddSignalR();
+builder.Services.AddScoped<NotificationService>();
+
 var app = builder.Build();
 // 2. Enable Middleware (Order matters!)
 app.UseAuthentication();
@@ -115,7 +119,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseRateLimiter();
 app.UseAuthorization();
-
+app.MapHub<NotificationHub>("/hubs/notifications");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
