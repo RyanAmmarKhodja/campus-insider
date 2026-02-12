@@ -6,8 +6,10 @@ The platform focuses on three main features:
 - Equipment sharing between campus members
 - Peer-to-peer equipment loans
 - Carpool ride organization
+- Messaging Platform
+- Real time Notifications System
 
-This project is currently under active development and is intended to demonstrate clean backend architecture and business-oriented design.
+This project is currently under active development and is intended to demonstrate backend architecture and business-oriented design.
 
 ---
 
@@ -42,9 +44,8 @@ Users can create carpool trips, join or leave rides, and manage seat availabilit
 
 UML diagrams are used to model entities, relationships, and business operations.
 ---
-<p align="center"> <img src="preview/db_uml_campusinsider.png" width="45%" /> <img src="preview/highleveldiagram.png" width="45%" /> </p>
+<p align="center"> <img src="preview/highleveldiagram.png" width="45%" /><img src="preview/db_uml_campusinsider.png" width="45%" />  </p>
 
 ## Project Status
 
 Ongoing development  
-Upcoming features include notifications, messaging, authentication.
