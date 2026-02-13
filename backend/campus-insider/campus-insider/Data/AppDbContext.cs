@@ -16,6 +16,9 @@ namespace campus_insider.Data
         public DbSet<CarpoolTrip> CarpoolTrips { get; set; }
         public DbSet<CarpoolPassenger> CarpoolPassengers { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<PostLike> PostLikes { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -316,6 +319,126 @@ namespace campus_insider.Data
             });
             #endregion
 
+            #region --- Post Configuration ---
+
+            modelBuilder.Entity<Post>(entity =>
+            {
+                entity.ToTable("Posts");
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AuthorId)
+                    .IsRequired();
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.Content)
+                    .IsRequired()
+                    .HasMaxLength(5000);
+
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.Category)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValue("DISCUSSION");
+
+                entity.Property(e => e.Tags)
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.LikeCount)
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.CommentCount)
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.IsActive)
+                    .HasDefaultValue(true);
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.Property(e => e.UpdatedAt);
+
+                // Relationships
+                entity.HasOne(p => p.Author)
+                    .WithMany(u => u.Posts)
+                    .HasForeignKey(p => p.AuthorId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                // Indexes
+                entity.HasIndex(p => p.AuthorId);
+                entity.HasIndex(p => p.Category);
+                entity.HasIndex(p => p.CreatedAt);
+                entity.HasIndex(p => p.IsActive);
+            });
+
+            #endregion
+
+            #region --- PostLike Configuration ---
+
+            modelBuilder.Entity<PostLike>(entity =>
+            {
+                entity.ToTable("PostLikes");
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.HasOne(pl => pl.Post)
+                    .WithMany(p => p.Likes)
+                    .HasForeignKey(pl => pl.PostId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(pl => pl.User)
+                    .WithMany(u => u.PostLikes)
+                    .HasForeignKey(pl => pl.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                // Composite unique index - user can only like a post once
+                entity.HasIndex(pl => new { pl.PostId, pl.UserId })
+                    .IsUnique();
+            });
+
+            #endregion
+
+            #region --- Comment Configuration ---
+
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.ToTable("Comments");
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Content)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.HasOne(c => c.Post)
+                    .WithMany(p => p.Comments)
+                    .HasForeignKey(c => c.PostId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(c => c.User)
+                    .WithMany(u => u.Comments)
+                    .HasForeignKey(c => c.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasIndex(c => c.PostId);
+                entity.HasIndex(c => c.CreatedAt);
+            });
+
+            #endregion
         }
     }
 }

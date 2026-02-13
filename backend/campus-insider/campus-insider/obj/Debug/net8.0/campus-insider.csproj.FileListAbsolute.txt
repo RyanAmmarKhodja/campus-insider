@@ -120,3 +120,11 @@ C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.
 C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Projects\campus-insider\backend\campus-insider\campus-insider\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
